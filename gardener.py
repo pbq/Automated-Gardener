@@ -47,8 +47,12 @@ atexit.register(exit_handler)
 
 
 
-# Turn water on every 30 minutes for 10 seconds
-schedule.every(30).minutes.do(threaded, water, forLength=10)
+# Turn water on every 120 minutes for 3 seconds
+schedule.every(120).minutes.do(threaded, water, forLength=3)
+
+# Turn light on for 4 hours from 10:30 to 14:30
+schedule.every().day.at("10:30").do(threaded, light, action=GardenerAction.turnOn)
+schedule.every().day.at("14:30").do(threaded, light, action=GardenerAction.turnOff)
 
 # Other scheduling examples
 #schedule.every().hour.do(threaded, light, forLength=300)
